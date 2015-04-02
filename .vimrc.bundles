@@ -1,12 +1,13 @@
 "==========================================
 " bundle 插件管理和配置项
 "==========================================
+
 "------------------------------------------- begin of configs --------------------------------------------
 
 "################### 包依赖 #####################
 "package dependence:  ctags
-"python dependence:  pep8, pyflake
-"
+"python dependence:   pep8, pyflake
+
 "非兼容vi模式。去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 set nocompatible
 " configure Vundle
@@ -17,11 +18,11 @@ call vundle#rc()
 
 "################### 插件管理 ###################
 
-"使用Vundle来管理插件
+" 使用Vundle来管理插件
 " vim plugin bundle control, command model
-" :BundleInstall     install 安装配置的插件
-" :BundleInstall!    update  更新
-" :BundleClean       remove plugin not in list 删除本地无用插件
+"     :BundleInstall     install 安装配置的插件
+"     :BundleInstall!    update  更新
+"     :BundleClean       remove plugin not in list 删除本地无用插件
 Bundle 'gmarik/vundle'
 
 
@@ -39,14 +40,12 @@ let g:syntastic_javascript_checkers = ['jsl', 'jshint']
 let g:syntastic_html_checkers=['tidy', 'jshint']
 highlight SyntasticErrorSign guifg=white guibg=black
 
-" EditorConfig
-Bundle 'editorconfig/editorconfig-vim'
-
 
 "################### 自动补全 ###################
 
 " 代码自动补全
 "迄今为止用到的最好的自动VIM自动补全插件
+"重启 :YcmRestartServer
 Bundle 'Valloric/YouCompleteMe'
 "youcompleteme  默认tab  s-tab 和自动补全冲突
 "let g:ycm_key_list_select_completion=['<c-n>']
@@ -55,9 +54,22 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
 let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
-"let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
 let g:ycm_collect_identifiers_from_tags_files = 1
+
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" 跳转到定义处, 分屏打开
+let g:ycm_goto_buffer_command = 'horizontal-split'
+" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+
+
+"let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+
 " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
 " old version
 if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
@@ -68,9 +80,8 @@ if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_
     let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 endif
 
-
-" 直接触发自动补全
-let g:ycm_key_invoke_completion = '<C-Space>'
+" 直接触发自动补全 insert模式下
+" let g:ycm_key_invoke_completion = '<C-Space>'
 " 黑名单,不启用
 let g:ycm_filetype_blacklist = {
       \ 'tagbar' : 1,
@@ -78,15 +89,39 @@ let g:ycm_filetype_blacklist = {
       \}
 
 
-" 代码片段快速插入
+" 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
 Bundle 'SirVer/ultisnips'
-" 代码片段资源,需要学习
 " Snippets are separated from the engine. Add this if you want them:
 Bundle 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" 定义存放代码片段的文件夹 .vim/additional_snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
-let g:UltiSnipsSnippetDirectories=["additional_snippets", 'UltiSnips']
+
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+" 定义存放代码片段的文件夹 .vim/UltiSnips下，使用自定义和默认的，将会的到全局，有冲突的会提示
+" 进入对应filetype的snippets进行编辑
+map <leader>us :UltiSnipsEdit<CR>
+
+" ctrl+j/k 进行选择
+func! g:JInYCM()
+    if pumvisible()
+        return "\<C-n>"
+    else
+        return "\<c-j>"
+    endif
+endfunction
+
+func! g:KInYCM()
+    if pumvisible()
+        return "\<C-p>"
+    else
+        return "\<c-k>"
+    endif
+endfunction
+inoremap <c-j> <c-r>=g:JInYCM()<cr>
+au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
+let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
 
 
 " 自动补全单引号，双引号等
@@ -94,16 +129,16 @@ Bundle 'Raimondi/delimitMate'
 "" for python docstring ",优化输入
 au FileType python let b:delimitMate_nesting_quotes = ['"']
 
+
 " 自动补全html/xml标签
 Bundle 'docunext/closetag.vim'
 let g:closetag_html_style=1
-
-
 
 "################### 快速编码 ###################
 
 " 快速注释
 Bundle 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims=1
 
 
 " 快速加入修改环绕字符
@@ -116,20 +151,24 @@ Bundle 'bronson/vim-trailing-whitespace'
 map <leader><space> :FixWhitespace<cr>
 
 " 快速赋值语句对齐
-Bundle 'godlygeek/tabular'
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-" :号也对齐
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-" :号不变
-"nmap <Leader>a: :Tabularize /:\zs<CR>
-"vmap <Leader>a: :Tabularize /:\zs<CR>
+Bundle 'junegunn/vim-easy-align'
+vmap <Leader>a <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+if !exists('g:easy_align_delimiters')
+  let g:easy_align_delimiters = {}
+endif
+let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
 
 "################### 快速移动 ###################
 
 "更高效的移动 [,, + w/fx]
 Bundle 'Lokaltog/vim-easymotion'
+let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><leader>l <Plug>(easymotion-lineforward)
 
 Bundle 'vim-scripts/matchit.zip'
 
@@ -137,8 +176,7 @@ Bundle 'vim-scripts/matchit.zip'
 " m[a-zA-Z] add mark
 " '[a-zA-Z] go to mark
 " m<Space>  del all marks
-"Bundle "kshenoy/vim-signature"
-
+Bundle "kshenoy/vim-signature"
 
 "################### 文本对象 ###################
 
@@ -169,7 +207,8 @@ let g:multi_cursor_quit_key='<Esc>'
 "################### 功能相关 ###################
 
 " 文件搜索
-Bundle 'kien/ctrlp.vim'
+" change to https://github.com/ctrlpvim/ctrlp.vim
+Bundle 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>f :CtrlPMRU<CR>
@@ -186,6 +225,7 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 
+
 " ctrlp插件1 - 不用ctag进行函数快速跳转
 Bundle 'tacahiroy/ctrlp-funky'
 nnoremap <Leader>fu :CtrlPFunky<Cr>
@@ -193,20 +233,26 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_funky_syntax_highlight = 1
 
-
-
 let g:ctrlp_extensions = ['funky']
 
 
 
 " git.  git操作还是习惯命令行,vim里面处理简单diff编辑操作
 Bundle 'tpope/vim-fugitive'
-" :Gdiff  :Gstatus :Gvsplit
+":Gdiff  :Gstatus :Gvsplit
 nnoremap <leader>ge :Gdiff<CR>
+" not ready to open
+" <leader>gb maps to :Gblame<CR>
+" <leader>gs maps to :Gstatus<CR>
+" <leader>gd maps to :Gdiff<CR>  和现有冲突
+" <leader>gl maps to :Glog<CR>
+" <leader>gc maps to :Gcommit<CR>
+" <leader>gp maps to :Git push<CR>
 
 " 同git diff,实时展示文件中修改的行
 " 只是不喜欢除了行号多一列, 默认关闭,gs时打开
 Bundle 'airblade/vim-gitgutter'
+let g:gitgutter_map_keys = 0
 let g:gitgutter_enabled = 0
 let g:gitgutter_highlight_lines = 1
 nnoremap <leader>gs :GitGutterToggle<CR>
@@ -218,12 +264,6 @@ nnoremap <leader>h :GundoToggle<CR>
 "################### 显示增强 ###################
 
 "状态栏增强展示
-" 老的powerline配置
-"Bundle 'Lokaltog/vim-powerline'
-"if want to use fancy,need to add font patch -> git clone git://gist.github.com/1630581.git ~/.fonts/ttf-dejavu-powerline
-"let g:Powerline_symbols = 'fancy'
-"let g:Powerline_symbols = 'unicode'
-
 " 新的airline配置
 Bundle 'bling/vim-airline'
 if !exists('g:airline_symbols')
@@ -289,7 +329,6 @@ Bundle 'tomasr/molokai'
 "let g:molokai_original = 1
 
 
-
 "################### 快速导航 ###################
 "目录导航
 Bundle 'scrooloose/nerdtree'
@@ -300,28 +339,62 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^
 "let g:netrw_home='~/bak'
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+" s/v 分屏打开文件
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
 
-"for minibufferexpl
-Bundle 'fholgado/minibufexpl.vim'
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-"解决FileExplorer窗口变小问题
-let g:miniBufExplForceSyntaxEnable = 1
-let g:miniBufExplorerMoreThanOne=2
-let g:miniBufExplCycleArround=1
 
-" 默认方向键左右可以切换buffer
-nnoremap <TAB> :MBEbn<CR>
-noremap <leader>bn :MBEbn<CR>
-noremap <leader>bp :MBEbp<CR>
-noremap <leader>bd :MBEbd<CR>
+Bundle 'jistr/vim-nerdtree-tabs'
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+" 关闭同步
+let g:nerdtree_tabs_synchronize_view=0
+let g:nerdtree_tabs_synchronize_focus=0
+" 自动开启nerdtree
+"let g:nerdtree_tabs_open_on_console_startup=1
 
-"标签导航
+
+" Vim Workspace Controller
+Bundle "szw/vim-ctrlspace"
+let g:airline_exclude_preview = 1
+hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
+hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
+hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
+hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
+
+
+"for minibufferexpl 去掉, 有需要同学的自己解开
+" Bundle 'fholgado/minibufexpl.vim'
+" let g:miniBufExplMapWindowNavVim = 1
+" let g:miniBufExplMapWindowNavArrows = 1
+" let g:miniBufExplMapCTabSwitchBufs = 1
+" let g:miniBufExplModSelTarget = 1
+" " 解决FileExplorer窗口变小问题
+" let g:miniBufExplForceSyntaxEnable = 1
+" let g:miniBufExplorerMoreThanOne=2
+" let g:miniBufExplCycleArround=1
+" " 默认方向键左右可以切换buffer
+" nnoremap <TAB> :MBEbn<CR>
+" noremap <leader>bn :MBEbn<CR>
+" noremap <leader>bp :MBEbp<CR>
+" noremap <leader>bd :MBEbd<CR>
+
+
+" 标签导航
 Bundle 'majutsushi/tagbar'
 nmap <F9> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
+
+" for ruby
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
 
 " go语言的tagbar配置
 " 1.install gotags 'go get -u github.com/jstemmer/gotags'
@@ -356,42 +429,10 @@ let g:tagbar_type_go = {
 \ }
 
 
-" 去除ctags
-" 原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
-"标签导航 要装ctags
-"Bundle 'vim-scripts/taglist.vim'
-"set tags=tags;/
-""确认自己的ctags路径设置,有时候系统默认ctags和安装ctags不是同一个
-"let Tlist_Ctags_Cmd="/usr/bin/ctags"
-""or
-""let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
-"nnoremap <silent> <F8> :TlistToggle<CR>
-"let Tlist_Auto_Highlight_Tag = 1
-"let Tlist_Auto_Open = 0
-"let Tlist_Auto_Update = 1
-"let Tlist_Close_On_Select = 0
-"let Tlist_Compact_Format = 0
-"let Tlist_Display_Prototype = 0
-"let Tlist_Display_Tag_Scope = 1
-"let Tlist_Enable_Fold_Column = 0
-"let Tlist_Exit_OnlyWindow = 1
-"let Tlist_File_Fold_Auto_Close = 0
-"let Tlist_GainFocus_On_ToggleOpen = 1
-"let Tlist_Hightlight_Tag_On_BufEnter = 1
-"let Tlist_Inc_Winwidth = 0
-"let Tlist_Max_Submenu_Items = 1
-"let Tlist_Max_Tag_Length = 30
-"let Tlist_Process_File_Always = 0
-"let Tlist_Show_Menu = 0
-"let Tlist_Show_One_File = 1
-"let Tlist_Sort_Type = "order"
-"let Tlist_Use_Horiz_Window = 0
-"let Tlist_Use_Right_Window = 0
-"let Tlist_WinWidth = 25
 
+" 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
 
 "################### 语言相关 ###################
-
 
 "###### Python #########
 
@@ -409,6 +450,14 @@ let python_highlight_all = 1
 Bundle 'Blackrush/vim-gocode'
 "Bundle 'fatih/vim-go.git'
 
+"###### Ruby #########
+" Bundle 'vim-ruby/vim-ruby'
+" Bundle 'nelstrom/vim-textobj-rubyblock'
+
+" 有bug, 和当前有冲突, 尚未解决, 不要打开
+" Bundle 'tpope/vim-endwise'
+
+
 "###### Markdown #########
 Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
@@ -418,30 +467,34 @@ let g:vim_markdown_folding_disabled=1
 " for HTML
 Bundle 'mattn/emmet-vim'
 
-" for javascript
+" for javascript  注意: syntax这个插件要放前面
+Bundle 'jelera/vim-javascript-syntax'
 Bundle "pangloss/vim-javascript"
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-" for javascript 自动补全,配合YCM,需要安装nodejs&npm
-Bundle "marijnh/tern_for_vim"
+
+" for javascript 自动补全,配合YCM,需要安装nodejs&npm  see
+" https://github.com/marijnh/tern_for_vim
+Bundle 'marijnh/tern_for_vim'
 
 "for jquery
 Bundle 'nono/jquery.vim'
+
+"###### emmet HTML complete #########
+"Bundle "mattn/emmet-vim"
+
+"###### vim.less : less 自动更新##########
+" Bundle 'groenewege/vim-less'
+" autocmd BufWritePost *.less :!lessc % > %:p:r.css
 
 "###### Jinja2 #########
 Bundle 'Glench/Vim-Jinja2-Syntax'
 
 "for css color
 "not work in iterm2 which termianl selection is not xterm-256
-"Bundle 'ap/vim-css-color'
-
-Bundle 'gorodinskiy/vim-coloresque'
-
-"###### nginx #########
-"Bundle 'evanmiller/nginx-vim-syntax'
-
+Bundle 'ap/vim-css-color'
 
 " for coffeescript
 Bundle 'kchmck/vim-coffee-script'
@@ -449,5 +502,14 @@ Bundle 'kchmck/vim-coffee-script'
 " for jade
 Bundle 'digitaltoad/vim-jade'
 
+" 这个有坑, see issue https://github.com/wklken/k-vim/issues/49
+"Bundle 'gorodinskiy/vim-coloresque'
+
+"###### nginx #########
+" Bundle 'evanmiller/nginx-vim-syntax'
+
+" 待审查
+" Bundle "thinca/vim-quickrun"
+" nnoremap <F10> :QuickRun<cr>
 
 "------------------------------------------- end of configs --------------------------------------------
