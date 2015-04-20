@@ -489,6 +489,9 @@ Bundle 'nono/jquery.vim'
 " Bundle 'groenewege/vim-less'
 " autocmd BufWritePost *.less :!lessc % > %:p:r.css
 
+"##### vim sass #########
+Bundle 'cakebaker/scss-syntax.vim'
+
 "###### Jinja2 #########
 Bundle 'Glench/Vim-Jinja2-Syntax'
 
@@ -501,6 +504,9 @@ Bundle 'kchmck/vim-coffee-script'
 
 " for jade
 Bundle 'digitaltoad/vim-jade'
+
+" for angular
+Bundle 'burnettk/vim-angular'
 
 " 这个有坑, see issue https://github.com/wklken/k-vim/issues/49
 "Bundle 'gorodinskiy/vim-coloresque'

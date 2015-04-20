@@ -329,13 +329,13 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Go to home and end using capitalized directions
-noremap H ^
-noremap L $
+" noremap H ^
+" noremap L $
 
 
 "Map ; to : and save a million keystrokes
 " ex mode commands made easy 用于快速进入命令行
-nnoremap ; :
+" nnoremap ; :
 
 
 " 命令行模式增强，ctrl - a到行首， -e 到行尾
@@ -443,7 +443,7 @@ vnoremap > >gv
 map Y y$
 
 " select all
-map <Leader>sa ggVG"
+" map <Leader>sa ggVG"
 
 " select block
 nnoremap <leader>v V`}
@@ -452,7 +452,7 @@ nnoremap <leader>v V`}
 cmap w!! w !sudo tee >/dev/null %
 
 " kj 替换 Esc
-inoremap kj <Esc>
+" inoremap kj <Esc>
 
 " 滚动Speed up scrolling of the viewport slightly
 nnoremap <C-e> 2<C-e>
@@ -465,7 +465,7 @@ nnoremap <C-y> 2<C-y>
 "nmap T O<ESC>j
 
 " Quickly close the current window
-nnoremap <leader>q :q<CR>
+" nnoremap <leader>q :q<CR>
 
 " Swap implementations of ` and ' jump to markers
 " By default, ' jumps to the marked line, ` jumps to the marked line and
@@ -474,7 +474,7 @@ nnoremap ' `
 nnoremap ` '
 
 " remap U to <C-r> for easier redo
-nnoremap U <C-r>
+" nnoremap U <C-r>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
