@@ -1,11 +1,9 @@
 "==========================================
-" Author:  wklken
-" Version: 8.0
-" Email: wklken@yeah.net
-" BlogPost: http://wklken.me
-" ReadMe: README.md
-" Donation: http://www.wklken.me/pages/donation.html
-" Last_modify: 2014-10-02
+" Author: geekplux 
+" Version: 0.0.1 
+" Email: geekplux@gmail.com
+" BlogPost: http://www.geekplux.com
+" Last_modify: 2015-05-05
 " Sections:
 "       -> Initial Plugin 加载插件
 "       -> General Settings 基础设置
