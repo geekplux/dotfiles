@@ -127,9 +127,18 @@ POWERLINE_HIDE_USER_NAME="true"
 # POWERLINE_SHOW_GIT_ON_RIGHT="true"
 
 # ruby configuration
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
-
+# Qu Jing iTerm & Terminal Setup Script
+# version 0.4
+# Felix Ding
+# Nov 18, 2014
+#
+function start_qujing {
+  export http_proxy='http://theironislands.f.getqujing.net:42963'
+  export HTTPS_PROXY='http://theironislands.f.getqujing.net:42963'
+}
 
 
 source $ZSH/oh-my-zsh.sh
