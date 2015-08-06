@@ -7,7 +7,7 @@
   (setq-default
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '()
+   dotspacemacs-configuration-layer-path '("~/.geekplux-spacemacs")
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
@@ -20,17 +20,27 @@
      auto-completion
      better-defaults
      emacs-lisp
-     (git :variables git-gutter-use-fringe t)
+     ;; (git :variables git-gutter-use-fringe t)
+     github
+     osx
      fast
-     ;; languages
-     c-c++
-     html
-     javascript
-     markdown
+     dash
      org
-     ;; shell
+     (colors :variables
+       colors-enable-nyan-cat-progress-bar t)
+     ;; languages
+     ;; c-c++
+     html
+     css
+     javascript
+     sass
+     scss
+     ruby
+     markdown
+     shell
      syntax-checking
      themes-megapack
+     search-engine
      )
    ;; List of additional packages that will be installed wihout being
    ;; wrapped in a layer. If you need some configuration for these
@@ -69,17 +79,17 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(material
+   dotspacemacs-themes '(monokai
+                         material
                          solarized-light
-                         solarized-dark
+                         solarized
                          leuven
-                         monokai
                          zenburn)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Monaco"
                                :size 13
                                :weight normal
                                :width normal
@@ -106,7 +116,7 @@ before layers configuration."
    dotspacemacs-enable-paste-micro-state nil
    ;; Guide-key delay in seconds. The Guide-key is the popup buffer listing
    ;; the commands bound to the current keystrokes.
-   dotspacemacs-guide-key-delay 0.4
+   dotspacemacs-guide-key-delay 0.2
    ;; If non nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil ;; to boost the loading time.
@@ -120,7 +130,7 @@ before layers configuration."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'.
@@ -162,6 +172,8 @@ layers configuration."
   ;; (global-linum-mode)
   ;; (setq column-number-mode t)
 
+  ;; org mode config
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
