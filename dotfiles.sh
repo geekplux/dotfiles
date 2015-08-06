@@ -11,4 +11,5 @@ echo move file finished!
 # push update
 git add ./
 git commit -m "$@"
+git push
 echo git push finished!
