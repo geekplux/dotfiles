@@ -30,7 +30,7 @@ export ZSH=/Users/geekplux/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerline"
+ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -70,14 +70,14 @@ ZSH_THEME="powerline"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting)
+plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting npm ruby)
 
 # User configuration
 
-export PATH="/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"
+export PATH="/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export JAVA_HOME="`/usr/libexec/java_home -v 1.8`"
-export RBENV_ROOT=/usr/local/var/rbenv
+export RBENV_ROOT="/usr/local/var/rbenv"
 
 
 # You may need to manually set your language environment
@@ -108,6 +108,7 @@ alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias cppcompile='c++ -std=c++11 -stdlib=libc++'
 alias rm='rm -i'
+alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
 
 
 #mkdir and cd
@@ -130,18 +131,9 @@ POWERLINE_HIDE_USER_NAME="true"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-# Qu Jing iTerm & Terminal Setup Script
-# version 0.4
-# Felix Ding
-# Nov 18, 2014
-#
-function start_qujing {
-  export http_proxy='http://theironislands.f.getqujing.net:42963'
-  export HTTPS_PROXY='http://theironislands.f.getqujing.net:42963'
-}
 
 
-alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
 
+stty -ixon -ixoff
 
 source $ZSH/oh-my-zsh.sh

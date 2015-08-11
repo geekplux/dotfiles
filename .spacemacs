@@ -24,10 +24,10 @@
      github
      osx
      fast
-     dash
+     deft
      org
      (colors :variables
-       colors-enable-nyan-cat-progress-bar t)
+             colors-enable-nyan-cat-progress-bar t)
      ;; languages
      ;; c-c++
      html
@@ -37,7 +37,8 @@
      scss
      ruby
      markdown
-     shell
+     (shell :variables
+            shell-default-shell 'shell)
      syntax-checking
      themes-megapack
      search-engine
@@ -130,7 +131,7 @@ before layers configuration."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'.
@@ -172,9 +173,23 @@ layers configuration."
   ;; (global-linum-mode)
   ;; (setq column-number-mode t)
 
+  ;; 2-space indent
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 2)
+
   ;; org mode config
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-)
 
+  ;; deft config
+  (setq deft-extension "org")
+  (setq deft-directory "~/Dropbox/notes")
+  (setq deft-text-mode 'org-mode)
+
+  ;; (setq org-todo-keywords '((sequence "PENDING(p!)" "TODO(t!)" "|" "DONE(d!)" "ABORT(a@/!)")))
+  ;; (setq deft-use-filename-as-title t)
+  ;; (setq deft-incremental-search nil)
+
+
+  )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
