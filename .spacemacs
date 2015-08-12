@@ -23,7 +23,6 @@
      ;; (git :variables git-gutter-use-fringe t)
      github
      osx
-     fast
      deft
      org
      (colors :variables
@@ -31,14 +30,12 @@
      ;; languages
      ;; c-c++
      html
-     css
      javascript
-     sass
-     scss
      ruby
      markdown
      (shell :variables
-            shell-default-shell 'shell)
+            shell-default-shell 'term
+            shell-default-term-shell "/bin/zsh")
      syntax-checking
      themes-megapack
      search-engine
@@ -176,13 +173,48 @@ layers configuration."
   ;; 2-space indent
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
+  (setq js-indent-level 2)
+  (setq javascript-indent-level 2)
+  (setq js2-basic-offset 2)
+
+
+
+  ;; web mode config
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  ;; HTML offset indentation
+  (setq web-mode-markup-indent-offset 2)
+  ;; CSS offset indentation
+  (setq web-mode-css-indent-offset 2)
+  ;; Script offset indentation (for JavaScript, Java, PHP, etc.)
+  (setq web-mode-code-indent-offset 2)
+  ;; By default, tag attributes are indented like this:
+  ;; fixed indentation with web-mode-attr-indent-offset
+  (setq web-mode-attr-indent-offset 2)
+
+
 
   ;; org mode config
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+  (setq org-agenda-files '("~/Dropbox/org/gtd.org"))
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+datetree "~/Dropbox/org/gtd.org")
+           "* TODO %?\n %i\n %a")
+          ("n" "Note" entry (file+headline "~/Dropbox/org/note.org" "Note")
+           "* %?\nEntered on %U\n %i\n %a")
+          ("b" "Book" entry (file+headline "~/Dropbox/org/book.org" "Book")
+           "* TODO %?\nEntered on %U\n %i\n %a")
+          ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
+           "* %?\nEntered on %U\n %i\n %a")))
 
   ;; deft config
-  (setq deft-extension "org")
-  (setq deft-directory "~/Dropbox/notes")
+  (setq deft-extensions '("md" "org"))
+  (setq deft-directory "~/Dropbox/org")
+  (setq deft-recursive t)
   (setq deft-text-mode 'org-mode)
 
   ;; (setq org-todo-keywords '((sequence "PENDING(p!)" "TODO(t!)" "|" "DONE(d!)" "ABORT(a@/!)")))

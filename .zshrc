@@ -132,8 +132,15 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 
-
-
+# config fot emacs
+if [ -n "$INSIDE_EMACS" ]; then
+  export TERM=eterm-color
+  export PAGER=cat
+else
+  export TERM=xterm-256color
+fi
 stty -ixon -ixoff
+
+
 
 source $ZSH/oh-my-zsh.sh
