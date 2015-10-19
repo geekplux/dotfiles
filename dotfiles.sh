@@ -7,7 +7,6 @@ cp ~/.vimrc.bundles ./.vimrc.bundles
 cp ~/.gitconfig ./.gitconfig
 cp ~/.gitignore_global ./.gitignore_global
 cp ~/.gemrc ./.gemrc
-cp ~/.spacemacs ./.spacemacs
 cp -r ~/.geekplux-spacemacs/ ./.geekplux-spacemacs/
 echo move file finished!
 
