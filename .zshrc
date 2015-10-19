@@ -70,7 +70,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting npm ruby)
+plugins=(colored-man colorize jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting npm ruby)
 
 # User configuration
 
@@ -109,6 +109,10 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias cppcompile='c++ -std=c++11 -stdlib=libc++'
 alias rm='rm -i'
 alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+alias redis.start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist"
+alias redis.stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist"
+alias redis.restart='redis.stop && redis.start'
+
 
 
 #mkdir and cd
