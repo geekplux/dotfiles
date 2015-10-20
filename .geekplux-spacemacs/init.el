@@ -225,8 +225,11 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
   ;; show line number
-  (global-linum-mode t)
+  ;; (global-linum-mode t)
   ;; (setq column-number-mode t)
+  ;; (add-hook 'prog-mode-hook #'linum-mode)
+  ;; (with-eval-after-load 'linum
+  ;;  (linum-relative-mode))
   (turn-on-fci-mode)
 
   ;; 2-space indent
@@ -281,7 +284,11 @@ layers configuration. You are free to put any user code."
   ;; (setq deft-use-filename-as-title t)
   ;; (setq deft-incremental-search nil)
 
-  (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 13 14)
+  ;;解决org表格里面中英文对齐的问题
+  (when (configuration-layer/layer-usedp 'chinese)
+    (when (spacemacs/system-is-mac)
+      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 13 14)))
+
 
   )
 
