@@ -1,3 +1,5 @@
+# this file is not used now.
+
 #!/bin/bash -e
 
 # copy files
