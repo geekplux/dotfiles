@@ -16,6 +16,7 @@
       '(
         ;; package names go here
         fcitx
+        org-mac-link
         ))
 
 ;; List of packages to exclude.
@@ -26,11 +27,23 @@
 ;; (defun geekplux/init-my-package ()
 ;;   "Initialize my package"
 ;;   )
+
 (defun geekplux/init-fcitx ()
   (use-package fcitx
     :defer t
     :init
     (fcitx-default-setup)))
+
+
+(defun geekplux/init-org-mac-link ()
+  (use-package org-mac-link
+    :defer t
+    :init
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))))
+
+
 ;;
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:

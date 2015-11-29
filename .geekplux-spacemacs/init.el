@@ -39,6 +39,8 @@ values."
             shell-default-position 'bottom)
      html
      javascript
+     (python :variables
+             python-test-runner 'pytest)
      python
      ruby
      ruby-on-rails
@@ -50,6 +52,8 @@ values."
      version-control
      themes-megapack
      dash
+     ;; deft
+     pandoc
 
      osx
      (colors :variables
@@ -260,6 +264,7 @@ layers configuration. You are free to put any user code."
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
   ;; HTML offset indentation
   (setq web-mode-markup-indent-offset 2)
   ;; CSS offset indentation
@@ -279,22 +284,22 @@ layers configuration. You are free to put any user code."
   (setq org-capture-templates
         '(("t" "Todo" entry (file+datetree "~/Dropbox/org/gtd.org")
            "* TODO %?\n %i\n %a")
-          ("n" "Note" entry (file+headline "~/Dropbox/org/note.org" "Note")
+          ("n" "Note" entry (file+headline "~/Dropbox/wiki/index.org" "Note")
            "* %?\nEntered on %U\n %i\n %a")
+          ;; ("n" "Note" entry (file "~/Dropbox/wiki/index.org")
+          ;;  "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
           ("b" "Book" entry (file+headline "~/Dropbox/org/book.org" "Book")
            "* TODO %?\nEntered on %U\n %i\n %a")
           ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
            "* %?\nEntered on %U\n %i\n %a")))
   ;; turn on soft wrapping mode for org mode
-  (add-hook'org-mode-hook
-   (lambda () (setq truncate-lines nil)))
-
-
+  (add-hook 'org-mode-hook (lambda ()
+                             (setq truncate-lines nil)))
 
 
   ;; deft config
   ;; (setq deft-extensions '("org" "md"))
-  ;; (setq deft-directory "~/Dropbox/org/notes")
+  ;; (setq deft-directory "~/Dropbox/wiki/index.org")
   ;; (setq deft-recursive t)
   ;; (setq deft-text-mode 'org-mode)
 
@@ -311,13 +316,11 @@ layers configuration. You are free to put any user code."
 
 
 
-
-
   (defun dotspacemacs/user-init ()
     (setq-default ruby-version-manager 'rbenv)
     )
 
   )
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+(setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+(load custom-file 'no-error 'no-message)
