@@ -17,6 +17,7 @@
         ;; package names go here
         fcitx
         org-mac-link
+        ox-ioslide
         ))
 
 ;; List of packages to exclude.

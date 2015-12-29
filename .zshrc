@@ -74,10 +74,11 @@ plugins=(colored-man colorize jira vagrant virtualenv pip python brew osx zsh-sy
 
 # User configuration
 
-export PATH="/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/share/python:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export JAVA_HOME="`/usr/libexec/java_home -v 1.8`"
 export RBENV_ROOT="/usr/local/var/rbenv"
+export PATH=$PATH:./node_modules/.bin
 
 
 # You may need to manually set your language environment
