@@ -10,5 +10,6 @@ ln -s .vimrc ~/.vimrc
 ln -s .vimrc.bundles ~/.vimrc.bundles
 ln -s .zshrc ~/.zshrc
 ln -s .apmrc ~/.atom/.apmrc
+ln -s .jsbeautifyrc ~/.jsbeautifyrc
 ln -s .geekplux-spacemacs ~/.geekplux-spacemacs
 ln -s .geekplux-spacemacs/init.el ~/.spacemacs

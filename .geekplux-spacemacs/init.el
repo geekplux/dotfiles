@@ -250,11 +250,24 @@ layers configuration. You are free to put any user code."
 
   ;; 2-space indent
   (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 2)
-  (setq js-indent-level 2)
-  (setq javascript-indent-level 2)
-  (setq js2-basic-offset 2)
-  (setq css-indent-offset 2)
+
+  (setq-default
+   tab-width 2
+   js-indent-level 2
+   javascript-indent-level 2
+   ;; js2-mode
+   js2-basic-offset 2
+   ;; web-mode
+   css-indent-offset 2
+   ;; HTML offset indentation
+   web-mode-markup-indent-offset 2
+   ;; CSS offset indentation
+   web-mode-css-indent-offset 2
+   ;; Script offset indentation (for JavaScript, Java, PHP, etc.)
+   web-mode-code-indent-offset 2
+   ;; By default, tag attributes are indented like this:
+   ;; fixed indentation with web-mode-attr-indent-offset
+   web-mode-attr-indent-offset 2)
 
 
   ;; web mode config
@@ -265,16 +278,12 @@ layers configuration. You are free to put any user code."
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
-  ;; HTML offset indentation
-  (setq web-mode-markup-indent-offset 2)
-  ;; CSS offset indentation
-  (setq web-mode-css-indent-offset 2)
-  ;; Script offset indentation (for JavaScript, Java, PHP, etc.)
-  (setq web-mode-code-indent-offset 2)
-  ;; By default, tag attributes are indented like this:
-  ;; fixed indentation with web-mode-attr-indent-offset
-  (setq web-mode-attr-indent-offset 2)
+  (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 
+  (with-eval-after-load 'web-mode
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
 
   ;; org mode config
