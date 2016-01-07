@@ -1,15 +1,15 @@
 #!/bin/bash -e
 
+
 # create symbolic links
-ln -s .bash_profile ~/.bash_profile
-ln -s .gemrc ~/.gemrc
-ln -s .git ~/.git
-ln -s .gitconfig ~/.gitconfig
-ln -s .gitignore_global ~/.gitignore_global
-ln -s .vimrc ~/.vimrc
-ln -s .vimrc.bundles ~/.vimrc.bundles
-ln -s .zshrc ~/.zshrc
-ln -s .apmrc ~/.atom/.apmrc
-ln -s .jsbeautifyrc ~/.jsbeautifyrc
-ln -s .geekplux-spacemacs ~/.geekplux-spacemacs
-ln -s .geekplux-spacemacs/init.el ~/.spacemacs
+ln -sf $(pwd)/.bash_profile ~/.bash_profile
+ln -sf $(pwd)/.gemrc ~/.gemrc
+ln -sf $(pwd)/.gitconfig ~/.gitconfig
+ln -sf $(pwd)/.gitignore_global ~/.gitignore_global
+ln -sf $(pwd)/.vimrc ~/.vimrc
+ln -sf $(pwd)/.vimrc.bundles ~/.vimrc.bundles
+ln -sf $(pwd)/.zshrc ~/.zshrc
+ln -sf $(pwd)/.apmrc ~/.atom/.apmrc
+ln -sf $(pwd)/.jsbeautifyrc ~/.jsbeautifyrc
+ln -sf $(pwd)/.geekplux-spacemacs ~/.geekplux-spacemacs
+ln -sf $(pwd)/.geekplux-spacemacs/init.el ~/.spacemacs
