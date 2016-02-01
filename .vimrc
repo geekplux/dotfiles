@@ -1,9 +1,9 @@
 "==========================================
-" Author: geekplux 
-" Version: 0.0.1 
+" Author: geekplux
+" Version: 0.0.1
 " Email: geekplux@gmail.com
 " BlogPost: http://www.geekplux.com
-" Last_modify: 2015-05-05
+" Last_modify: 2016-02-01
 " Sections:
 "       -> Initial Plugin 加载插件
 "       -> General Settings 基础设置
@@ -21,6 +21,9 @@
 " Initial Plugin 加载插件
 "==========================================
 
+set shell=/usr/local/bin/zsh
+
+
 " 修改leader键
 let mapleader = ','
 let g:mapleader = ','
@@ -29,7 +32,7 @@ let g:mapleader = ','
 syntax on
 
 
-" install Vundle bundles
+" install bundles
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
@@ -48,17 +51,19 @@ filetype plugin indent on
 " history存储容量
 set history=2000
 
-"检测文件类型
+" 检测文件类型
 filetype on
-"针对不同的文件类型采用不同的缩进格式
+" 针对不同的文件类型采用不同的缩进格式
 filetype indent on
-"允许插件
+" 允许插件
 filetype plugin on
-"启动自动补全
+" 启动自动补全
 filetype plugin indent on
 
-set autoread          " 文件修改之后自动载入。
-set shortmess=atI       " 启动的时候不显示那个援助索马里儿童的提示
+" 文件修改之后自动载入
+set autoread
+" 启动的时候不显示那个援助索马里儿童的提示
+set shortmess=atI
 
 " 备份,到另一个位置. 防止误删, 目前是取消备份
 "set backup
@@ -71,22 +76,29 @@ set nobackup
 set noswapfile
 
 
-"create undo file
-if has('persistent_undo')
-  set undolevels=1000         " How many undos
-  set undoreload=10000        " number of lines to save for undo
-  set undofile                " So is persistent undo ...
-  set undodir=/tmp/vimundo/
-endif
+" TODO: remove this, use gundo
+" create undo file
+" if has('persistent_undo')
+  " " How many undos
+  " set undolevels=1000
+  " " number of lines to save for undo
+  " set undoreload=10000
+  " " So is persistent undo ...
+  " "set undofile
+  " set noundofile
+  " " set undodir=/tmp/vimundo/
+" endif
 
 set wildignore=*.swp,*.bak,*.pyc,*.class,.svn
-" 突出显示当前行等
+
+" 突出显示当前列
 set cursorcolumn
-set cursorline          " 突出显示当前行
+" 突出显示当前行
+set cursorline
 
 
-"设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制
-"好处：误删什么的，如果以前屏幕打开，可以找回
+" 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
+" 好处：误删什么的，如果以前屏幕打开，可以找回
 set t_ti= t_te=
 
 
@@ -171,6 +183,18 @@ set foldenable
 " marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
 set foldmethod=indent
 set foldlevel=99
+" 代码折叠自定义快捷键 <leader>zz
+let g:FoldMethod = 0
+map <leader>zz :call ToggleFold()<cr>
+fun! ToggleFold()
+    if g:FoldMethod == 0
+        exe "normal! zM"
+        let g:FoldMethod = 1
+    else
+        exe "normal! zR"
+        let g:FoldMethod = 0
+    endif
+endfun
 
 " 缩进配置
 
@@ -251,8 +275,19 @@ set wildignore=*.o,*~,*.pyc,*.class
 
 "离开插入模式后自动关闭预览窗口
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
 "回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+
+" In the quickfix window, <CR> is used to jump to the error under the
+" cursor, so undefine the mapping there.
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+" quickfix window  s/v to open in split window,  ,gd/,jd => quickfix window => open it
+autocmd BufReadPost quickfix nnoremap <buffer> v <C-w><Enter><C-w>L
+autocmd BufReadPost quickfix nnoremap <buffer> s <C-w><Enter><C-w>K
+
+" command-line window
+autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
 
 "上下左右键的行为 会显示其他信息
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
@@ -285,17 +320,13 @@ nnoremap j gj
 nnoremap gj j
 
 " F1 - F6 设置
-" F1 废弃这个键,防止调出系统帮助
-" F2 行号开关，用于鼠标复制代码用
-" F3 显示可打印字符开关
-" F4 换行开关
-" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
-" F6 语法开关，关闭语法可以加快大文件的展示
 
+" F1 废弃这个键,防止调出系统帮助
 " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
 noremap <F1> <Esc>"
 
-""为方便复制，用<F2>开启/关闭行号显示:
+" F2 行号开关，用于鼠标复制代码用
+" 为方便复制，用<F2>开启/关闭行号显示:
 function! HideNumber()
   if(&relativenumber == &number)
     set relativenumber! number!
@@ -307,9 +338,14 @@ function! HideNumber()
   set number?
 endfunc
 nnoremap <F2> :call HideNumber()<CR>
+" F3 显示可打印字符开关
 nnoremap <F3> :set list! list?<CR>
+" F4 换行开关
 nnoremap <F4> :set wrap! wrap?<CR>
-              "set paste
+
+" F6 语法开关，关闭语法可以加快大文件的展示
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
 set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
                                 "    paste mode, where you can paste mass data
                                 "    that won't be autoindented
@@ -317,7 +353,15 @@ set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
 " disbale paste mode when leaving insert mode
 au InsertLeave * set nopaste
 
-nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+" F5 set paste问题已解决, 粘贴代码前不需要按F5了
+" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
+" Automatically set paste mode in Vim when pasting in insert mode
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 
 "Smart way to move between windows 分屏窗口移动
@@ -325,6 +369,23 @@ nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 " map <C-k> <C-W>k
 " map <C-h> <C-W>h
 " map <C-l> <C-W>l
+
+" http://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <Leader>z :ZoomToggle<CR>
+
 
 " Go to home and end using capitalized directions
 " noremap H ^
@@ -357,6 +418,7 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
+
 " switch # *
 nnoremap # *
 nnoremap * #
@@ -370,20 +432,19 @@ noremap <silent><leader>/ :nohls<CR>
 
 " --------tab/buffer相关
 
-"Use arrow key to change buffer"
-" TODO: 如何跳转到确定的buffer?
-" :b1 :b2   :bf :bl
+" 切换前后buffer
 nnoremap [b :bprevious<cr>
 nnoremap ]b :bnext<cr>
+" 使用方向键切换buffer
 noremap <left> :bp<CR>
 noremap <right> :bn<CR>
 
 
 " tab 操作
-" TODO: ctrl + n 变成切换tab的方法
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
 " http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
-"map <C-2> 2gt
+
+" tab切换
 map <leader>th :tabfirst<cr>
 map <leader>tl :tablast<cr>
 
@@ -395,18 +456,6 @@ map <leader>tp :tabprev<cr>
 map <leader>te :tabedit<cr>
 map <leader>td :tabclose<cr>
 map <leader>tm :tabm<cr>
-
-
-" 新建tab  Ctrl+t
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
-" TODO: 配置成功这里, 切换更方便, 两个键
-" nnoremap <C-S-tab> :tabprevious<CR>
-" nnoremap <C-tab>   :tabnext<CR>
-" inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-" inoremap <C-tab>   <Esc>:tabnext<CR>i
-" nnoremap <C-Left> :tabprevious<CR>
-" nnoremap <C-Right> :tabnext<CR>
 
 " normal模式下切换到确切的tab
 noremap <leader>1 1gt
@@ -427,18 +476,29 @@ let g:last_active_tab = 1
 " nnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
 " vnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
 nnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
-vnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
 autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
+" 新建tab  Ctrl+t
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
 
-" ------- 选中及操作改键
 
-"Reselect visual block after indent/outdent.调整缩进后自动选中，方便再次操作
+" => 选中及操作改键
+
+" 调整缩进后自动选中，方便再次操作
 vnoremap < <gv
 vnoremap > >gv
 
 " y$ -> Y Make Y behave like other capitals
 map Y y$
+
+" 复制选中区到系统剪切板中
+vnoremap <leader>y "+y
+
+" auto jump to end of select
+" vnoremap <silent> y y`]
+" vnoremap <silent> p p`]
+" nnoremap <silent> p p`]
 
 " select all
 " map <Leader>sa ggVG"
@@ -465,14 +525,15 @@ nnoremap <C-y> 2<C-y>
 " Quickly close the current window
 " nnoremap <leader>q :q<CR>
 
-" Swap implementations of ` and ' jump to markers
-" By default, ' jumps to the marked line, ` jumps to the marked line and
-" column, so swap them
+" Quickly save the current file
+nnoremap <leader>w :w<CR>
+
+" 交换 ' `, 使得可以快速使用'跳到marked位置
 nnoremap ' `
 nnoremap ` '
 
 " remap U to <C-r> for easier redo
-" nnoremap U <C-r>
+nnoremap U <C-r>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -482,9 +543,15 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " FileType Settings  文件类型设置
 "==========================================
 
-" Python 文件的一般设置，比如不要 tab 等
+" 具体编辑文件类型的一般设置，比如不要 tab 等
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
+autocmd BufRead,BufNewFile *.part set filetype=html
+" disable showmatch when use > in php
+au BufWinEnter *.php set mps-=<:>
+
+
 
 " 保存python文件时删除多余空格
 fun! <SID>StripTrailingWhitespaces()
@@ -515,47 +582,12 @@ function! AutoSetFileHead()
     normal o
 endfunc
 
-"C，C++, shell, python, javascript, ruby...等按F10运行
-map <F10> :call CompileRun()<CR>
-func! CompileRun()
-    exec "w"
-    if &filetype == 'c'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-        exec "!rm ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-        exec "!rm ./%<"
-    elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!time java %<"
-        exec "!rm ./%<.class"
-    elseif &filetype == 'sh'
-        exec "!time bash %"
-    elseif &filetype == 'python'
-        exec "!time python %"
-    elseif &filetype == 'html'
-        exec "!chrome % &"
-    elseif &filetype == 'go'
-        exec "!go build %<"
-        exec "!time go run %"
-    elseif &filetype == 'mkd' "MarkDown 解决方案为VIM + Chrome浏览器的MarkDown Preview Plus插件，保存后实时预览
-        exec "!chrome % &"
-    elseif &filetype == 'javascript'
-        exec "!time node %"
-    elseif &filetype == 'coffee'
-        exec "!time coffee %"
-    elseif &filetype == 'ruby'
-        exec "!time ruby %"
-    endif
-endfunc
 
-" set some keyword to highlight
+" 设置可以高亮的关键字
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
   if v:version > 701
-    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
   endif
 endif
@@ -605,5 +637,3 @@ highlight clear SpellRare
 highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
-
-
