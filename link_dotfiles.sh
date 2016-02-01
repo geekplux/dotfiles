@@ -11,5 +11,6 @@ ln -sf $(pwd)/.vimrc.bundles ~/.vimrc.bundles
 ln -sf $(pwd)/.zshrc ~/.zshrc
 ln -sf $(pwd)/.apmrc ~/.atom/.apmrc
 ln -sf $(pwd)/.jsbeautifyrc ~/.jsbeautifyrc
-ln -sf $(pwd)/.geekplux-spacemacs ~/.geekplux-spacemacs
-ln -sf $(pwd)/.geekplux-spacemacs/init.el ~/.spacemacs
+ln -sf $(pwd)/.geekplux-spacemacs ~/.spacemacs.d
+ln -sf $(pwd)/config.fish ~/.config/fish/config.fish
+#ln -sf $(pwd)/.geekplux-spacemacs/init.el ~/.spacemacs

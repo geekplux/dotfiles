@@ -48,7 +48,9 @@ values."
      scheme
      yaml
      ;; spell-checking
-     syntax-checking
+     (syntax-checking :variables
+                      syntax-checking-enable-by-default nil
+                      syntax-checking-enable-tooltips nil)
      version-control
      themes-megapack
      dash
