@@ -32,6 +32,7 @@
 
 (defun geekplux/init-web-mode ()
   (use-package web-mode
+    :ensure t
     :defer t
     :mode
     (("\\.jsx\\'" . web-mode))
@@ -46,6 +47,7 @@
 
 (defun geekplux/init-fcitx ()
   (use-package fcitx
+    :ensure t
     :defer t
     :init
     (fcitx-default-setup)))
@@ -53,11 +55,21 @@
 
 (defun geekplux/init-org-mac-link ()
   (use-package org-mac-link
+    :ensure t
     :defer t
     :init
     (add-hook 'org-mode-hook
               (lambda ()
                 (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))))
+
+(defun geekplux/init-org-alert ()
+  (use-package org-alert
+    :ensure t
+    :defer t
+    :init
+    (setq alert-default-style 'libnotify)
+    :config
+    (org-alert-enable)))
 
 
 ;;
