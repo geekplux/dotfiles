@@ -71,6 +71,13 @@
     :config
     (org-alert-enable)))
 
+(defun geekplux/init-ox-ioslide ()
+  (use-package ox-ioslide
+    :ensure t
+    :defer t
+    :init
+    ))
+
 
 ;;
 ;; Often the body of an initialize function uses `use-package'

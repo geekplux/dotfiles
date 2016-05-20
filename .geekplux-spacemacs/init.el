@@ -43,6 +43,7 @@ values."
             shell-default-position 'bottom)
      html
      javascript
+     typescript
      (python :variables
              python-test-runner 'pytest)
      python
@@ -353,7 +354,13 @@ you should place you code here."
 
   ;; org mode config
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-  (setq org-bullets-bullet-list '("♨" "❦" "❧" "☪"))
+  ;; Org Headline Bullet Style (From Level 0 to Level 20)
+  (setq org-bullets-bullet-list '("⓪" "①" "②" "③"
+                                  "④" "⑤" "⑥" "⑦"
+                                  "⑧" "⑨" "⑩" "⑪"
+                                  "⑫" "⑬" "⑭"
+                                  "⑮" "⑯" "⑰"
+                                  "⑱" "⑲" "⑳"))
   (setq org-agenda-files '("~/Dropbox/org/gtd.org"))
   (setq org-capture-templates
         '(("t" "Todo" entry (file+datetree "~/Dropbox/org/gtd.org")
