@@ -19,6 +19,7 @@
         org-mac-link
         ox-ioslide
         org-alert
+        geiser
         ))
 
 ;; List of packages to exclude.
@@ -77,6 +78,15 @@
     :defer t
     :init
     ))
+
+;; (defun geekplux/init-geiser ()
+;;   (use-package geiser
+;;     :ensure t
+;;     :defer t
+;;     :init
+;;     (setq geiser-active-implementations '(guile))
+;;     (setq geiser-default-implementations '(guile))
+;;     ))
 
 
 ;;
