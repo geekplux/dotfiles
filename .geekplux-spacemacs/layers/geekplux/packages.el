@@ -1,10 +1,9 @@
 ;;; packages.el --- geekplux Layer packages File for Spacemacs
 ;;
-;; Copyright (c) 2012-2014 Sylvain Benner
-;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
+;; Copyright (c) 2015-2016 GeekPlux
 ;;
-;; Author: Sylvain Benner <sylvain.benner@gmail.com>
-;; URL: https://github.com/syl20bnr/spacemacs
+;; Author: GeekPlux <geekplux@gmail.com>
+;; URL: https://github.com/geekplux/dotfiles
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -20,6 +19,8 @@
         ox-ioslide
         org-alert
         geiser
+        company
+        web-mode
         ))
 
 ;; List of packages to exclude.
@@ -30,6 +31,16 @@
 ;; (defun geekplux/init-my-package ()
 ;;   "Initialize my package"
 ;;   )
+
+(defun geekplux/post-init-company ()
+  (when (configuration-layer/layer-usedp 'auto-completion)
+    (spacemacs|add-company-hook markdown-mode)
+    (spacemacs|add-company-hook sh-mode)
+    (spacemacs|add-company-hook shell-script-mode)
+    (spacemacs|add-company-hook makefile-bsdmake-mode)
+    (spacemacs|add-company-hook conf-unix-mode)
+    ))
+
 
 (defun geekplux/init-web-mode ()
   (use-package web-mode
@@ -43,7 +54,11 @@
         (if (equal web-mode-content-type "jsx")
             (let ((web-mode-enable-part-face nil))
               ad-do-it)
-          ad-do-it)))))
+          ad-do-it))
+      (setq company-backends-web-mode '((company-dabbrev-code
+                                         company-keywords
+                                         company-etags)
+                                        company-files company-dabbrev)))))
 
 
 (defun geekplux/init-fcitx ()

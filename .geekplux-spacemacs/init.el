@@ -26,7 +26,15 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-private-snippets-directory nil
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-sort-by-usage t)
      better-defaults
      emacs-lisp
      git
@@ -52,14 +60,13 @@ values."
      scheme
      yaml
      ;; spell-checking
-     (syntax-checking :variables
-                      syntax-checking-enable-by-default nil
-                      syntax-checking-enable-tooltips nil)
+     syntax-checking
      version-control
      themes-megapack
      dash
      ;; deft
      pandoc
+     latex
 
      osx
      (colors :variables
@@ -77,10 +84,10 @@ values."
    dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(gnuplot
-                                    yasnippet
                                     chinese-wbim
                                     chinese-pyim
                                     youdao-dictionary
+                                    auto-complete
                                     )
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
@@ -411,6 +418,5 @@ you should place you code here."
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
-
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

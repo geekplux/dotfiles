@@ -70,7 +70,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man colorize jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting npm ruby)
+plugins=(autojump colored-man colorize jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting npm ruby git z)
 
 # User configuration
 
