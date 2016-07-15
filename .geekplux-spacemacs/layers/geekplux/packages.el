@@ -21,6 +21,7 @@
         geiser
         company
         web-mode
+        ;; js2-mode
         ))
 
 ;; List of packages to exclude.
@@ -40,6 +41,17 @@
     (spacemacs|add-company-hook makefile-bsdmake-mode)
     (spacemacs|add-company-hook conf-unix-mode)
     ))
+
+
+;; (defun geekplux/init-js2-mode ()
+;;   (progn
+;;     (defun my-js2-mode-hook ()
+;;       (progn
+;;         (setq forward-sexp-function nil)
+;;         ;; (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
+;;         (set (make-local-variable 'semantic-mode) nil)
+;;         ))
+;;     (add-hook 'js2-mode-hook 'my-js2-mode-hook)))
 
 
 (defun geekplux/init-web-mode ()
