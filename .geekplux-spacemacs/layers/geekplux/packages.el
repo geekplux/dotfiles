@@ -21,6 +21,7 @@
         geiser
         company
         web-mode
+        stylus-mode
         ;; js2-mode
         ))
 
@@ -103,7 +104,6 @@
   (use-package ox-ioslide
     :ensure t
     :defer t
-    :init
     ))
 
 ;; (defun geekplux/init-geiser ()
@@ -114,6 +114,15 @@
 ;;     (setq geiser-active-implementations '(guile))
 ;;     (setq geiser-default-implementations '(guile))
 ;;     ))
+
+
+(defun geekplux/init-stylus-mode ()
+  (use-package stylus-mode
+    :ensure t
+    :commands stylus-mode
+    :init
+    (add-to-list 'auto-mode-alist '("\\.styl\\'" . stylus-mode))))
+
 
 
 ;;
