@@ -81,7 +81,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer, You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(editorconfig)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(gnuplot
                                     chinese-wbim
@@ -337,6 +337,8 @@ you should place you code here."
    ;; fixed indentation with web-mode-attr-indent-offset
    web-mode-attr-indent-offset 2)
 
+  ;; editorconfig support
+  (editorconfig-mode 1)
 
   ;; web mode config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
