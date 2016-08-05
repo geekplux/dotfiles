@@ -7,5 +7,5 @@ module.exports = {
   rules: {
     semi: 2
   },
-  extends: 'airbnb-base',
-}
+  extends: 'standard',
+};
