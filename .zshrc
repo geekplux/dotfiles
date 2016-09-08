@@ -74,13 +74,6 @@ plugins=(autojump colored-man colorize jira vagrant virtualenv pip python brew o
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/share/python:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
-export JAVA_HOME="`/usr/libexec/java_home -v 1.8`"
-export RBENV_ROOT="/usr/local/var/rbenv"
-export PATH=$PATH:./node_modules/.bin
-
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
