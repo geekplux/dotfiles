@@ -4,3 +4,6 @@ export JAVA_HOME="`/usr/libexec/java_home -v 1.8`"
 export RBENV_ROOT="/usr/local/var/rbenv"
 export PATH=$PATH:./node_modules/.bin
 
+# ruby configuration
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

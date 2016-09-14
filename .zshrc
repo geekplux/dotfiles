@@ -125,10 +125,6 @@ export TERM="xterm-256color"
 POWERLINE_HIDE_USER_NAME="true"
 # POWERLINE_SHOW_GIT_ON_RIGHT="true"
 
-# ruby configuration
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 
 # config fot emacs
 if [ -n "$INSIDE_EMACS" ]; then
