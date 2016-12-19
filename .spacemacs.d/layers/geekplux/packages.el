@@ -14,15 +14,12 @@
 (setq geekplux-packages
       '(
         ;; package names go here
-        fcitx
         org-mac-link
         ox-ioslide
         org-alert
-        geiser
+        ;; geiser
         company
-        web-mode
         stylus-mode
-        ;; js2-mode
         ))
 
 ;; List of packages to exclude.
@@ -44,7 +41,7 @@
     ))
 
 
-;; (defun geekplux/init-js2-mode ()
+;; (defun geekplux/post-js2-mode ()
 ;;   (progn
 ;;     (defun my-js2-mode-hook ()
 ;;       (progn
@@ -55,7 +52,7 @@
 ;;     (add-hook 'js2-mode-hook 'my-js2-mode-hook)))
 
 
-(defun geekplux/init-web-mode ()
+(defun geekplux/post-web-mode ()
   (use-package web-mode
     :ensure t
     :defer t
@@ -74,12 +71,18 @@
                                         company-files company-dabbrev)))))
 
 
-(defun geekplux/init-fcitx ()
-  (use-package fcitx
-    :ensure t
-    :defer t
-    :init
-    (fcitx-default-setup)))
+;; (defun geekplux/post-fcitx ()
+;;   (use-package fcitx
+;;     :ensure t
+;;     :defer t
+;;     :init
+;;     (
+;;      ;; Make sure the following comes before `(fcitx-aggressive-setup)'
+;;      (setq fcitx-active-evil-states '(insert emacs hybrid)) ; if you use hybrid mode
+;;      (fcitx-aggressive-setup)
+;;      (fcitx-prefix-keys-add "M-m") ; M-m is common in Spacemacs
+;;      ;; (setq fcitx-use-dbus t) ; uncomment if you're using Linux
+;;      )))
 
 
 (defun geekplux/init-org-mac-link ()
