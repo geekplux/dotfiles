@@ -20,6 +20,9 @@
         ;; geiser
         company
         stylus-mode
+        (vue-mode :location (recipe
+                             :fetcher github
+                             :repo "codefalling/vue-mode"))
         ))
 
 ;; List of packages to exclude.
@@ -123,9 +126,17 @@
   (use-package stylus-mode
     :ensure t
     :commands stylus-mode
-    :init
+    :config
     (add-to-list 'auto-mode-alist '("\\.styl\\'" . stylus-mode))))
 
+
+(defun geekplux/init-vue-mode ()
+  (use-package vue-mode
+    :ensure t
+    :defer t
+    :mode "\\.vue\\'"
+    :config
+    (setq mmm-submode-decoration-level 0)))
 
 
 ;;
