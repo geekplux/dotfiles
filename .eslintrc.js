@@ -7,5 +7,9 @@ module.exports = {
   rules: {
     semi: 2
   },
-  extends: 'standard',
+  extends: 'airbnb-base',
+  env: {
+    'browser': true,
+    'es6': true
+  },
 };
