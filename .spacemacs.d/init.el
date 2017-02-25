@@ -183,7 +183,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Fira Code Retina"
                                :size 13
                                :weight normal
                                :width normal
@@ -461,7 +461,7 @@ you should place your code here."
   ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
     (when (spacemacs/system-is-mac)
-      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 13 14)))
+      (spacemacs//set-monospaced-font "Fira Code Retina" "Hiragino Sans GB" 13 14)))
 
   (setq org-export-backends (quote (ascii html icalendar latex md)))
 
