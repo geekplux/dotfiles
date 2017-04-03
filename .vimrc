@@ -2,7 +2,7 @@
 " Author: geekplux
 " Version: 0.0.1
 " Email: geekplux@gmail.com
-" BlogPost: http://www.geekplux.com
+" BlogPost: http://geekplux.com
 " Last_modify: 2016-02-01
 " Sections:
 "       -> Initial Plugin 加载插件
