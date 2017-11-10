@@ -10,10 +10,10 @@
 ;;; License: GPLv3
 
 
-(spacemacs|defvar-company-backends markdown-mode)
+;; (spacemacs|defvar-company-backends markdown-mode)
 ;; (spacemacs|defvar-company-backends org-mode)
 
-(spacemacs|defvar-company-backends sh-mode)
-(spacemacs|defvar-company-backends shell-script-mode)
-(spacemacs|defvar-company-backends makefile-bsdmake-mode)
-(spacemacs|defvar-company-backends conf-unix-mode)
+;; (spacemacs|defvar-company-backends sh-mode)
+;; (spacemacs|defvar-company-backends shell-script-mode)
+;; (spacemacs|defvar-company-backends makefile-bsdmake-mode)
+;; (spacemacs|defvar-company-backends conf-unix-mode)

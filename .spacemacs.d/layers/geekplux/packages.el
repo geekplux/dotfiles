@@ -14,7 +14,7 @@
 (setq geekplux-packages
       '(
         ;; package names go here
-        org-mac-link
+        ;; org-mac-link
         ox-ioslide
         org-alert
         ;; geiser
@@ -34,14 +34,14 @@
 ;;   "Initialize my package"
 ;;   )
 
-(defun geekplux/post-init-company ()
-  (when (configuration-layer/layer-usedp 'auto-completion)
-    (spacemacs|add-company-hook markdown-mode)
-    (spacemacs|add-company-hook sh-mode)
-    (spacemacs|add-company-hook shell-script-mode)
-    (spacemacs|add-company-hook makefile-bsdmake-mode)
-    (spacemacs|add-company-hook conf-unix-mode)
-    ))
+;; (defun geekplux/post-init-company ()
+;;   (when (configuration-layer/layer-usedp 'auto-completion)
+;;     (spacemacs|add-company-hook markdown-mode)
+;;     (spacemacs|add-company-hook sh-mode)
+;;     (spacemacs|add-company-hook shell-script-mode)
+;;     (spacemacs|add-company-hook makefile-bsdmake-mode)
+;;     (spacemacs|add-company-hook conf-unix-mode)
+;;     ))
 
 
 ;; (defun geekplux/post-js2-mode ()
@@ -88,14 +88,14 @@
 ;;      )))
 
 
-(defun geekplux/init-org-mac-link ()
-  (use-package org-mac-link
-    :ensure t
-    :defer t
-    :init
-    (add-hook 'org-mode-hook
-              (lambda ()
-                (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))))
+;; (defun geekplux/init-org-mac-link ()
+;;   (use-package org-mac-link
+;;     :ensure t
+;;     :defer t
+;;     :init
+;;     (add-hook 'org-mode-hook
+;;               (lambda ()
+;;                 (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))))
 
 (defun geekplux/init-org-alert ()
   (use-package org-alert
