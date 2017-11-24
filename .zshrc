@@ -107,6 +107,7 @@ alias redis.start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.pli
 alias redis.stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist"
 alias redis.restart='redis.stop && redis.start'
 alias brewup='brew update && brew upgrade && brew cleanup && brew cu && brew cask cleanup'
+alias groot=‘cd $(git rev-parse --show-toplevel)’
 
 
 
@@ -140,5 +141,6 @@ eval "$(rbenv init -)"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
 
 source $ZSH/oh-my-zsh.sh
