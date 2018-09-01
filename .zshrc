@@ -106,8 +106,8 @@ alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
 alias redis.start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist"
 alias redis.stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist"
 alias redis.restart='redis.stop && redis.start'
-alias brewup='brew update && brew upgrade && brew cleanup && brew cu && brew cask cleanup'
-alias groot=‘cd $(git rev-parse --show-toplevel)’
+alias brewup='brew update && brew upgrade && brew cleanup'
+alias groot='cd $(git rev-parse --show-toplevel)'
 
 
 

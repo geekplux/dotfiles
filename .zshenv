@@ -15,7 +15,7 @@ export PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
 export PATH="$PATH:/usr/local/var/rbenv/shims"
 
 # go configuration
-export GOPATH="$HOME/Dropbox/project/go"
+export GOPATH="$HOME/project/go"
 export PATH="$PATH:$GOPATH/bin"
 
 export PATH="$PATH:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/TeX/texbin"
