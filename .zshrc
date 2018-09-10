@@ -108,6 +108,8 @@ alias redis.stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.pl
 alias redis.restart='redis.stop && redis.start'
 alias brewup='brew update && brew upgrade && brew cleanup'
 alias groot='cd $(git rev-parse --show-toplevel)'
+alias cat='bat'
+alias ping='prettyping --nolegend'
 
 
 
