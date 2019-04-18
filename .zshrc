@@ -110,6 +110,8 @@ alias brewup='brew update && brew upgrade && brew cleanup'
 alias groot='cd $(git rev-parse --show-toplevel)'
 alias cat='bat'
 alias ping='prettyping --nolegend'
+alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
+
 
 
 
@@ -145,5 +147,11 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 
-source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH/oh-my-zsh.sh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/geekplux/.sdkman"
+[[ -s "/Users/geekplux/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/geekplux/.sdkman/bin/sdkman-init.sh"
