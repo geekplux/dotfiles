@@ -7,9 +7,9 @@ export PATH="$PATH:./node_modules/.bin"
 export PKG_CONFIG_PATH="$PATH:/usr/local/Cellar/pkg-config/0.29.1_2"
 
 export PATH="$PATH:/usr/local/share/python"
+export PATH="$PATH:/usr/local/share/python3"
 
 # ruby configuration
-export PATH="$PATH:$HOME/.rbenv/bin"
 export PATH="$PATH:/usr/local/var/rbenv/versions/2.2.2/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
 export PATH="$PATH:/usr/local/var/rbenv/shims"
