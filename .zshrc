@@ -1,45 +1,39 @@
-# Lines configured by zsh-newuser-install
-
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-# unsetopt appendhistory autocd beep extendedglob nomatch notify
-# bindkey -v
-
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-
-# zstyle :compinstall filename '/Users/geekplux/.zshrc'
-
-autoload -Uz compinit
-# compinit
-# End of lines added by compinstall
-
-
-
-
-
-
-
-
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/geekplux/.oh-my-zsh
+export ZSH="/Users/geekplux/.oh-my-zsh"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="ys"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -60,19 +54,27 @@ ZSH_THEME="ys"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(autojump colored-man colorize jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting npm ruby git z)
+plugins=(autojump colorize jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting npm ruby git z zsh-autosuggestions zsh-completions)
+
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -87,69 +89,40 @@ plugins=(autojump colored-man colorize jira vagrant virtualenv pip python brew o
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi='mvim -v'
 alias vim='mvim -v'
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias cppcompile='c++ -std=c++11 -stdlib=libc++'
 alias rm='rm -i'
-alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
-alias redis.start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist"
-alias redis.stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist"
-alias redis.restart='redis.stop && redis.start'
 alias brewup='brew update && brew upgrade && brew cleanup'
-alias groot='cd $(git rev-parse --show-toplevel)'
 alias cat='bat'
 alias ping='prettyping --nolegend'
-alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
-
-
-
 
 #mkdir and cd
 function mkcd() { mkdir -p "$@" && cd "$_"; }
-
 # FileSearch
 function f() { find . -iname "*$1*" ${@:2} }
 function r() { grep "$1" ${@:2} -R . }
 
 
-# 256color
-export TERM="xterm-256color"
-
-# powerline configuration
-# POWERLINE_HIDE_HOST_NAME="true"
-POWERLINE_HIDE_USER_NAME="true"
-# POWERLINE_SHOW_GIT_ON_RIGHT="true"
-
-
-# config fot emacs
-if [ -n "$INSIDE_EMACS" ]; then
-  export TERM=eterm-color
-  export PAGER=cat
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/geekplux/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
 else
-  export TERM=xterm-256color
+    if [ -f "/Users/geekplux/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/geekplux/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/geekplux/opt/anaconda3/bin:$PATH"
+    fi
 fi
-stty -ixon -ixoff
+unset __conda_setup
+# <<< conda initialize <<<
 
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZSH/oh-my-zsh.sh
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/geekplux/.sdkman"
-[[ -s "/Users/geekplux/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/geekplux/.sdkman/bin/sdkman-init.sh"
