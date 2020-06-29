@@ -99,7 +99,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi='mvim -v'
 alias vim='mvim -v'
-alias rm='rm -i'
+alias rm='trash'
 alias brewup='brew update && brew upgrade && brew cleanup'
 alias cat='bat'
 alias ping='prettyping --nolegend'
