@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -68,7 +70,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(autojump colorize jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting npm ruby git z zsh-autosuggestions zsh-completions)
+plugins=(autojump colorize jira vagrant virtualenv pip python brew macos zsh-syntax-highlighting npm ruby git z zsh-autosuggestions zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,3 +128,16 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# pnpm
+export PNPM_HOME="/Users/geekplux/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+# doom emacs
+export EMACS_HOME="$HOME/.emacs.d/bin"
+export PATH="$EMACS_HOME:$PATH"
+# doom emacs end
+
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
