@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+;; (setq user-full-name "John Doe"
+;;       user-mail-address "john@doe.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -36,11 +36,11 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type `relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Dropbox/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -58,6 +58,13 @@
 ;;
 ;; Here are some additional functions/macros that will help you configure Doom.
 ;;
+
+
+
+
+
+
+
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
 ;; - `after!' for running code after a package has loaded
@@ -74,3 +81,37 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+
+
+(when (eq system-type 'darwin)
+  (osx-trash-setup))
+(setq delete-by-moving-to-trash t)
+(setq-default mac-system-move-file-to-trash-use-finder t)
+(setq trash-directory "~/.Trash")
+
+;; (set-terminal-coding-system 'utf-8)
+;; (set-keyboard-coding-system 'utf-8)
+;; (set-process-coding-system 'utf-8)
+;; (prefer-coding-system 'utf-8)
+
+;; (add-hook 'term-exec-hook
+;;           (function
+;;            (lambda ()
+;;              (set-process-coding-system 'utf-8-unix 'utf-8-unix))))
+
+
+(after! keyfreq
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1)
+  )
+
+(after! org
+  (setq org-export-with-broken-links t))
+
+(after! markdown
+  (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode)))
+
+(setq yas-snippet-dirs
+      '("~/.doom.d/snippets"))
