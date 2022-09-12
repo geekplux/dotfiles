@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-;; (setq user-full-name "John Doe"
-;;       user-mail-address "john@doe.com")
+(setq user-full-name "GeekPlux"
+      user-mail-address "geekplux@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -87,9 +87,9 @@
 
 (when (eq system-type 'darwin)
   (osx-trash-setup))
-(setq delete-by-moving-to-trash t)
-(setq-default mac-system-move-file-to-trash-use-finder t)
-(setq trash-directory "~/.Trash")
+(setq delete-by-moving-to-trash t
+      mac-system-move-file-to-trash-use-finder t
+      trash-directory "~/.Trash")
 
 ;; (set-terminal-coding-system 'utf-8)
 ;; (set-keyboard-coding-system 'utf-8)
@@ -115,3 +115,38 @@
 
 (setq yas-snippet-dirs
       '("~/.doom.d/snippets"))
+
+
+;; wakatime
+(after! wakatime-mode
+
+  (setq wakatime-api-key "36266b20-31a5-449a-97f4-fefd83724fa2")
+  (global-wakatime-mode)
+  )
+
+
+(setq projectile-project-search-path '("~/project/"))
+
+
+;; ========== UI start ===========
+(use-package! mixed-pitch
+  :hook (org-mode . mixed-pitch-mode)
+  :config
+  (setq mixed-pitch-face 'variable-pitch))
+
+;; if started by emacs command or desktop file
+(if (eq initial-window-system 'x)
+    (toggle-frame-maximized)
+  (toggle-frame-fullscreen))
+
+(after! eshell-syntax-highlighting
+  (eshell-syntax-highlighting-global-mode 1))
+
+(use-package! org-appear
+  :after org
+  :hook (org-mode . org-appear-mode)
+  :config (setq
+           org-appear-autolinks t
+           org-appear-autoentities t
+           org-appear-autosubmarkers t ))
+;; ========== UI end ===========

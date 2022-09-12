@@ -50,3 +50,7 @@
 ;(unpin! t)
 
 (package! keyfreq)
+(package! eshell-syntax-highlighting)
+(package! wakatime-mode :recipe (:host github :repo "wakatime/wakatime-mode"))
+(package! prettier)
+(package! org-appear)
