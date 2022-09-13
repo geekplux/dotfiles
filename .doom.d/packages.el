@@ -54,3 +54,5 @@
 (package! wakatime-mode :recipe (:host github :repo "wakatime/wakatime-mode"))
 (package! prettier)
 (package! org-appear)
+(package! nano-theme)
+(package! nano-modeline)

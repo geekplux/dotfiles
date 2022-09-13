@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+;; (setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -128,11 +128,14 @@
 (setq projectile-project-search-path '("~/project/"))
 
 
-;; ========== UI start ===========
-(use-package! mixed-pitch
-  :hook (org-mode . mixed-pitch-mode)
-  :config
-  (setq mixed-pitch-face 'variable-pitch))
+;;; UI start
+(setq doom-theme 'doom-one)
+(setq doom-font (font-spec :family "Operator Mono" :size 14 :weight 'book))
+(setq tab-width 2)
+;; (use-package! mixed-pitch
+;;   :hook (org-mode . mixed-pitch-mode)
+;;   :config
+;;   (setq mixed-pitch-face 'variable-pitch))
 
 ;; if started by emacs command or desktop file
 (if (eq initial-window-system 'x)
@@ -149,4 +152,27 @@
            org-appear-autolinks t
            org-appear-autoentities t
            org-appear-autosubmarkers t ))
-;; ========== UI end ===========
+
+(defun change-nano-theme-dark ()
+  (interactive)
+  (progn
+    (setq doom-theme nil)
+    (require 'nano-theme)
+    (nano-mode)
+    (nano-dark)
+    ))
+
+(defun change-nano-theme-light ()
+  (interactive)
+  (progn
+    (setq doom-theme nil)
+    (require 'nano-theme)
+    (nano-mode)
+    (nano-light)
+    ))
+
+(defun change-back-doom-theme ()
+  (interactive)
+  (setq doom-theme 'doom-one))
+
+(change-nano-theme-dark)
