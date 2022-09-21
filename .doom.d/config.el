@@ -175,4 +175,4 @@
   (interactive)
   (setq doom-theme 'doom-one))
 
-(change-nano-theme-dark)
+;; (change-nano-theme-dark)
