@@ -1,0 +1,18 @@
+;;; init-evil.el -*- lexical-binding: t no-byte-compile: t -*-
+
+(use-package undo-tree
+  :ensure t
+  :diminish
+  :init
+  (global-undo-tree-mode 1)
+  (setq undo-tree-auto-save-history nil)
+  (evil-set-undo-system 'undo-tree))
+
+(use-package evil
+  :ensure t
+  :init
+  (evil-mode))
+
+
+(provide 'init-evil)
+;;; init-evil.el ends here

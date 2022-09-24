@@ -1,4 +1,4 @@
-;;; init-elpa.el --- Settings and helpers for package.el -*- lexical-binding: t -*-
+;;; init-package.el --- Settings and helpers for package.el -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -118,5 +118,11 @@ advice for `require-package', to which ARGS are passed."
 (add-hook 'package-menu-mode-hook 'sanityinc/maybe-widen-package-menu-columns)
 
 
-(provide 'init-elpa)
-;;; init-elpa.el ends here
+;; Setup `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+
+(provide 'init-package)
+;;; init-package.el ends here

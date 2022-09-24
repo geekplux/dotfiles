@@ -38,7 +38,11 @@
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
-(require 'init-elpa)      ;; Machinery for installing required packages
+(require 'init-package)      ;; Machinery for installing required packages
+
+
+(require 'init-evil)
+(require 'init-keybinding)
 
 (provide 'init)
 
