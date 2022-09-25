@@ -43,6 +43,7 @@
 
 (require 'init-evil)
 (require 'init-keybinding)
+(require 'init-theme)
 
 (provide 'init)
 

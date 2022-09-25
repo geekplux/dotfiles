@@ -2,5 +2,6 @@ eln-cache
 elpa
 elpa-*
 custom.el
-custom.el*
 site-lisp/package
+url/
+*~

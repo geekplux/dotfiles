@@ -3,10 +3,9 @@
 (use-package undo-tree
   :ensure t
   :diminish
-  :init
+  :config
   (global-undo-tree-mode 1)
-  (setq undo-tree-auto-save-history nil)
-  (evil-set-undo-system 'undo-tree))
+  (setq undo-tree-auto-save-history nil))
 
 (use-package evil
   :ensure t
