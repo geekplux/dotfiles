@@ -130,7 +130,8 @@
 
 ;;; UI start
 (setq doom-theme 'doom-one)
-(setq doom-font (font-spec :family "Operator Mono" :size 14 :weight 'book))
+;; (setq doom-font (font-spec :family "Operator Mono" :size 14 :weight 'book))
+(setq doom-font (font-spec :family "Roboto Mono"))
 (setq tab-width 2)
 ;; (use-package! mixed-pitch
 ;;   :hook (org-mode . mixed-pitch-mode)
@@ -138,9 +139,7 @@
 ;;   (setq mixed-pitch-face 'variable-pitch))
 
 ;; if started by emacs command or desktop file
-(if (eq initial-window-system 'x)
-    (toggle-frame-maximized)
-  (toggle-frame-fullscreen))
+(toggle-frame-maximized)
 
 (after! eshell-syntax-highlighting
   (eshell-syntax-highlighting-global-mode 1))
@@ -176,3 +175,8 @@
   (setq doom-theme 'doom-one))
 
 ;; (change-nano-theme-dark)
+
+(after! which-key
+  (setq which-key-idle-delay 0.5))
+
+(add-to-list 'auto-mode-alist '("\\.bean\\'" . beancount-mode))
